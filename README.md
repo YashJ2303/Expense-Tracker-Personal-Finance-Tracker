@@ -6,90 +6,114 @@ A modern, high-performance Expense Tracking application with a premium glassmorp
 ![Java](https://img.shields.io/badge/Java-17%2B-orange)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-blue)
 
+## 📖 Table of Contents
+- [✨ Features](#-features)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [🏗️ Architecture](#️-architecture)
+- [🚀 Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Database Setup](#database-setup)
+  - [Installation & Run](#installation--run)
+- [⌨️ Keyboard Shortcuts](#️-keyboard-shortcuts)
+- [🤝 Contributing](#-contributing)
+
 ## ✨ Features
 
--   **Dashboard**: Overview of monthly spending, total transactions, and top categories.
--   **Analytics & Trends**: Interactive charts (Chart.js) and a daily spending heatmap.
--   **Smart Budgets**: Set monthly limits and receive visual alerts when approaching thresholds.
--   **AI Predictions**: Forecast next month's spending based on historical data.
--   **Recurring Expenses**: Automate tracking for subscriptions and bills.
--   **Reminders**: Stay on top of due dates with a dedicated reminders system.
--   **Dual Theme**: Seamless Dark and Light mode support with a custom SVG icon system.
--   **Keyboard Shortcuts**: Fast navigation for power users (N: New, 1-5: Pages, T: Theme).
+-   **💎 Premium UI**: Modern glassmorphism design with semi-transparent elements and vibrant gradients.
+-   **📊 Dynamic Dashboard**: Real-time overview of monthly spending, transaction counts, and category breakdowns.
+-   **📈 Advanced Analytics**: Interactive Chart.js visualizations and a longitudinal spending heatmap.
+-   **🎯 Smart Budgets**: Set financial goals per category with real-time threshold alerts.
+-   **🤖 AI Predictions**: Data-driven forecasting for future spending based on historical local data.
+-   **🔄 Recurring Expenses**: Automated tracking for subscriptions, utilities, and monthly bills.
+-   **🔔 Smart Reminders**: Integrated system for due dates and financial milestones.
+-   **🌗 Dual Theme**: Native Dark and Light mode support with a custom SVG icon system.
 
 ## 🛠️ Tech Stack
 
--   **Backend**: Java (HttpServer), JDBC, MySQL
+-   **Backend**: Java 17+ (HttpServer), JDBC
+-   **Database**: MySQL 8.0+
 -   **Frontend**: Vanilla HTML5, CSS3 (Glassmorphism), JavaScript (ES6+)
 -   **Charting**: Chart.js
--   **Icons**: Custom SVG Icon Sprite System
+-   **Icons**: Custom Optimized SVG Icon Sprite System
+
+## 🏗️ Architecture
+
+The application follows a clean modular architecture:
+- **`api`**: Lightweight HTTP Server implementation handling RESTful endpoints.
+- **`service`**: Business logic layer managing transaction processing and authentication.
+- **`model`**: Data structures representing Expenses, Users, and Budgets.
+- **`cli`**: Supplementary command-line interface for direct database interaction.
+- **`web`**: Decoupled frontend assets served via the Java backend.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
--   Java 17 or higher
--   MySQL Server
--   A modern web browser
+- **Java Development Kit (JDK) 23** or higher
+- **MySQL Server**
+- A modern web browser (Chrome, Firefox, Edge, Safari)
 
 ### Database Setup
 
-1.  Create a MySQL database named `expense_tracker`.
-2.  Import the database schema:
+1.  Create a MySQL database:
+    ```sql
+    CREATE DATABASE expense_tracker;
+    ```
+2.  Import the provided schema:
     ```bash
     mysql -u root -p expense_tracker < schema.sql
     ```
-3.  Configure your credentials:
-    -   Copy `config/db.properties.example` to `config/db.properties`.
-    -   Update the file with your local MySQL username and password.
+3.  Configure credentials:
+    -   Rename `config/db.properties.example` to `config/db.properties`.
+    -   Update with your local MySQL `user` and `password`.
 
-### Installation
+### Installation & Run
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/expense-tracker-java.git
-    cd expense-tracker-java
-    ```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/YashJ2303/Expense-Tracker-Personal-Finance-Tracker.git
+   cd Expense-Tracker-Personal-Finance-Tracker
+   ```
 
-2.  Compile the project:
-    ```bash
-    # On Windows (from project root)
-    dir src\*.java /s /b > sources.txt
-    javac -d build -cp "lib/*" @sources.txt
-    del sources.txt
-    ```
+2. **Compile the project**:
+   ```powershell
+   # Create build directory
+   mkdir build -ErrorAction SilentlyContinue
 
-3.  Run the application:
-    ```bash
-    # Run API server (Web UI)
-    java -cp "build;lib/mysql-connector-j-9.2.0.jar" api.ExpenseAPI
+   # Compile source files
+   javac -d build -cp "lib/mysql-connector-j-9.2.0.jar" src\api\ExpenseAPI.java src\cli\ExpenseTracker.java src\model\Expense.java src\model\User.java src\security\PasswordHasher.java src\service\AuthService.java src\service\ExpenseService.java
+   ```
 
-    # Run CLI interface
-    java -cp "build;lib/mysql-connector-j-9.2.0.jar" cli.ExpenseTracker
-    ```
+3. **Run the Application**:
+   ```powershell
+   # Start Web Server
+   java -cp "build;lib/mysql-connector-j-9.2.0.jar" api.ExpenseAPI
+   ```
 
-4.  Open your browser and navigate to:
-    ```
-    http://localhost:8080
-    ```
+4. **Access the Dashboard**:
+   Navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## ⌨️ Keyboard Shortcuts
 
 | Key | Action |
 | :--- | :--- |
 | `N` | Open "Add Expense" Modal |
-| `1` | Dashboard |
-| `2` | Expenses List |
-| `3` | Trends & Heatmap |
-| `4` | Reports |
-| `5` | Budgets |
-| `T` | Toggle Dark/Light Mode |
-| `?` | Show Shortcuts |
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+| `1` | Home Dashboard |
+| `2` | Transaction History |
+| `3` | Visual Trends |
+| `4` | Detailed Reports |
+| `5` | Budget Manager |
+| `T` | Toggle UI Theme |
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+*Developed with ❤️ by [YashJ2303](https://github.com/YashJ2303)*
