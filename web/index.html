@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker — Smart Finance Manager</title>
+    <meta name="description"
+        content="Track expenses, set budgets, analyze trends, and manage finances with this modern tracker.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- SVG Icon Sprite -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
+            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
+            <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z" />
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10" />
+            <line x1="12" y1="20" x2="12" y2="4" />
+            <line x1="6" y1="20" x2="6" y2="14" />
+        </symbol>
+        <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+            <line x1="1" y1="10" x2="23" y2="10" />
+        </symbol>
+        <symbol id="i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+            <polyline points="17 6 23 6 23 12" />
+        </symbol>
+        <symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+        </symbol>
+        <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="6" />
+            <circle cx="12" cy="12" r="2" />
+        </symbol>
+        <symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+            <line x1="7" y1="7" x2="7.01" y2="7" />
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10" />
+            <polyline points="1 20 1 14 7 14" />
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+        </symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+        </symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+        </symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+        </symbol>
+        <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+        </symbol>
+        <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+        </symbol>
+        <symbol id="i-pie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+            <path d="M22 12A10 10 0 0 0 12 2v10z" />
+        </symbol>
+        <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+        </symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </symbol>
+        <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+            <path d="M4 22h16" />
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20 7 22" />
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20 17 22" />
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </symbol>
+        <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+                d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+            <path d="M5 3v4" />
+            <path d="M19 17v4" />
+            <path d="M3 5h4" />
+            <path d="M17 19h4" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <polyline points="9 12 11 14 15 10" />
+        </symbol>
+        <symbol id="i-keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" ry="2" />
+            <line x1="6" y1="8" x2="6.01" y2="8" />
+            <line x1="10" y1="8" x2="10.01" y2="8" />
+            <line x1="14" y1="8" x2="14.01" y2="8" />
+            <line x1="18" y1="8" x2="18.01" y2="8" />
+            <line x1="8" y1="12" x2="8.01" y2="12" />
+            <line x1="12" y1="12" x2="12.01" y2="12" />
+            <line x1="16" y1="12" x2="16.01" y2="12" />
+            <line x1="7" y1="16" x2="17" y2="16" />
+        </symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+        </symbol>
+        <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+        </symbol>
+        <symbol id="i-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+        </symbol>
+    </svg>
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ═══ AUTH SCREEN ═══ -->
+    <section id="auth-screen" class="screen auth-screen">
+        <!-- Animated background shapes -->
+        <div class="auth-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+
+        <div class="auth-split">
+            <!-- Left Hero Panel -->
+            <div class="auth-hero">
+                <div class="auth-hero-content">
+                    <div class="hero-badge"><svg class="icon-xs">
+                            <use href="#i-sparkles" />
+                        </svg> Smart Finance</div>
+                    <h1 class="hero-title">Take Control of<br><span class="hero-gradient">Your Finances</span></h1>
+                    <p class="hero-subtitle">Track spending, set budgets, predict trends — all in one beautiful
+                        dashboard.</p>
+
+                    <!-- Inline SVG illustration -->
+                    <div class="hero-illustration">
+                        <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Dashboard mockup -->
+                            <rect x="40" y="30" width="320" height="220" rx="16" fill="rgba(124,108,240,0.08)"
+                                stroke="rgba(124,108,240,0.3)" stroke-width="1.5" />
+                            <!-- Header bar -->
+                            <rect x="40" y="30" width="320" height="40" rx="16" fill="rgba(124,108,240,0.12)" />
+                            <rect x="40" y="56" width="320" height="14" fill="rgba(124,108,240,0.12)" rx="0" />
+                            <!-- Traffic lights -->
+                            <circle cx="60" cy="50" r="5" fill="#f87171" />
+                            <circle cx="78" cy="50" r="5" fill="#fbbf24" />
+                            <circle cx="96" cy="50" r="5" fill="#34d399" />
+                            <!-- Stat cards -->
+                            <rect x="60" y="85" width="90" height="50" rx="8" fill="rgba(124,108,240,0.15)"
+                                class="svg-float-1" />
+                            <rect x="65" y="95" width="40" height="6" rx="3" fill="rgba(124,108,240,0.4)" />
+                            <rect x="65" y="108" width="60" height="10" rx="3" fill="rgba(124,108,240,0.6)" />
+                            <rect x="65" y="123" width="30" height="5" rx="3" fill="rgba(124,108,240,0.3)" />
+
+                            <rect x="160" y="85" width="90" height="50" rx="8" fill="rgba(52,211,153,0.15)"
+                                class="svg-float-2" />
+                            <rect x="165" y="95" width="40" height="6" rx="3" fill="rgba(52,211,153,0.4)" />
+                            <rect x="165" y="108" width="55" height="10" rx="3" fill="rgba(52,211,153,0.6)" />
+                            <rect x="165" y="123" width="35" height="5" rx="3" fill="rgba(52,211,153,0.3)" />
+
+                            <rect x="260" y="85" width="80" height="50" rx="8" fill="rgba(251,191,36,0.15)"
+                                class="svg-float-3" />
+                            <rect x="265" y="95" width="35" height="6" rx="3" fill="rgba(251,191,36,0.4)" />
+                            <rect x="265" y="108" width="50" height="10" rx="3" fill="rgba(251,191,36,0.6)" />
+                            <rect x="265" y="123" width="25" height="5" rx="3" fill="rgba(251,191,36,0.3)" />
+
+                            <!-- Chart line -->
+                            <polyline points="75,210 115,185 155,195 200,165 240,175 280,150 320,160" stroke="#7c6cf0"
+                                stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                class="chart-line" />
+                            <path d="M75,210 115,185 155,195 200,165 240,175 280,150 320,160 L320,230 L75,230 Z"
+                                fill="url(#chartGradient)" opacity="0.3" />
+                            <!-- Chart dots -->
+                            <circle cx="75" cy="210" r="4" fill="#7c6cf0" class="svg-float-1" />
+                            <circle cx="155" cy="195" r="4" fill="#7c6cf0" class="svg-float-2" />
+                            <circle cx="240" cy="175" r="4" fill="#7c6cf0" class="svg-float-3" />
+                            <circle cx="320" cy="160" r="4" fill="#7c6cf0" class="svg-float-1" />
+                            <!-- Gradient definition -->
+                            <defs>
+                                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#7c6cf0" stop-opacity="0.4" />
+                                    <stop offset="100%" stop-color="#7c6cf0" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Floating coins -->
+                            <circle cx="30" cy="120" r="14" fill="rgba(251,191,36,0.2)" stroke="rgba(251,191,36,0.5)"
+                                stroke-width="1.5" class="svg-float-2" />
+                            <text x="30" y="125" text-anchor="middle" fill="rgba(251,191,36,0.8)" font-size="14"
+                                font-weight="700">₹</text>
+                            <circle cx="375" cy="80" r="12" fill="rgba(52,211,153,0.2)" stroke="rgba(52,211,153,0.5)"
+                                stroke-width="1.5" class="svg-float-3" />
+                            <text x="375" y="85" text-anchor="middle" fill="rgba(52,211,153,0.8)" font-size="12"
+                                font-weight="700">$</text>
+                        </svg>
+                    </div>
+
+                    <!-- Feature list -->
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <span class="feature-icon"><svg class="icon-sm">
+                                    <use href="#i-chart" />
+                                </svg></span>
+                            <div>
+                                <strong>Real-time Analytics</strong>
+                                <span>Interactive charts & heatmaps</span>
+                            </div>
+                        </div>
+                        <div class="hero-feature">
+                            <span class="feature-icon"><svg class="icon-sm">
+                                    <use href="#i-target" />
+                                </svg></span>
+                            <div>
+                                <strong>Smart Budgets</strong>
+                                <span>Set limits & get alerts</span>
+                            </div>
+                        </div>
+                        <div class="hero-feature">
+                            <span class="feature-icon"><svg class="icon-sm">
+                                    <use href="#i-zap" />
+                                </svg></span>
+                            <div>
+                                <strong>AI Predictions</strong>
+                                <span>Forecast next month's spending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Auth Panel -->
+            <div class="auth-panel">
+                <div class="auth-card">
+                    <div class="auth-card-brand">
+                        <span class="logo-icon"><svg class="icon-lg">
+                                <use href="#i-wallet" />
+                            </svg></span>
+                        <h2>Welcome</h2>
+                        <p>Sign in to manage your expenses</p>
+                    </div>
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" data-tab="login">Login</button>
+                        <button class="tab-btn" data-tab="signup">Sign Up</button>
+                    </div>
+                    <form id="login-form" class="auth-form active">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <div class="input-icon-wrap">
+                                <span class="input-icon"><svg class="icon-xs">
+                                        <use href="#i-user" />
+                                    </svg></span>
+                                <input type="text" id="login-user" placeholder="Enter your username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="input-icon-wrap">
+                                <span class="input-icon"><svg class="icon-xs">
+                                        <use href="#i-lock" />
+                                    </svg></span>
+                                <input type="password" id="login-pass" placeholder="Enter your password" required>
+                            </div>
+                        </div>
+                        <button type="submit" id="login-submit-btn" class="btn btn-primary btn-glow">
+                            <span class="btn-text">Sign In →</span>
+                            <span class="spinner"></span>
+                        </button>
+                    </form>
+                    <form id="signup-form" class="auth-form">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <div class="input-icon-wrap">
+                                <span class="input-icon"><svg class="icon-xs">
+                                        <use href="#i-user" />
+                                    </svg></span>
+                                <input type="text" id="signup-user" placeholder="Choose a username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="input-icon-wrap">
+                                <span class="input-icon"><svg class="icon-xs">
+                                        <use href="#i-lock" />
+                                    </svg></span>
+                                <input type="password" id="signup-pass" placeholder="Choose a password" required>
+                            </div>
+                        </div>
+                        <button type="submit" id="signup-submit-btn" class="btn btn-primary btn-glow">
+                            <span class="btn-text">Create Account →</span>
+                            <span class="spinner"></span>
+                        </button>
+                    </form>
+                    <div class="auth-footer">
+                        <small><svg class="icon-xs">
+                                <use href="#i-shield" />
+                            </svg> Your data is encrypted and secure</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ APP SCREEN ═══ -->
+    <section id="app-screen" class="screen">
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <h2><svg class="icon-sm">
+                    <use href="#i-wallet" />
+                </svg> Expense Tracker</h2>
+            <button id="menu-toggle"><svg class="icon-sm">
+                    <use href="#i-menu" />
+                </svg></button>
+        </div>
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <div class="app-layout">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar">
+                <div class="sidebar-brand">
+                    <h2><svg class="icon-sm">
+                            <use href="#i-wallet" />
+                        </svg> Expense</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <div class="nav-section-title">Overview</div>
+                    <a href="#" class="nav-link active" data-page="dashboard">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-chart" />
+                            </svg></span> Overview
+                    </a>
+                    <a href="#" class="nav-link" data-page="expenses">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-card" />
+                            </svg></span> Portfolio
+                    </a>
+
+                    <div class="nav-section-title">Analytics</div>
+                    <a href="#" class="nav-link" data-page="trends">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-trending" />
+                            </svg></span> Trends
+                    </a>
+                    <a href="#" class="nav-link" data-page="report">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-clipboard" />
+                            </svg></span> Reports
+                    </a>
+
+                    <div class="nav-section-title">Manage</div>
+                    <a href="#" class="nav-link" data-page="budgets">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-target" />
+                            </svg></span> Budgets
+                    </a>
+                    <a href="#" class="nav-link" data-page="recurring">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-refresh" />
+                            </svg></span> Recurring
+                    </a>
+                    <a href="#" class="nav-link" data-page="reminders">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-bell" />
+                            </svg></span> Alerts
+                    </a>
+
+                    <div class="nav-section-title">Account</div>
+                    <a href="#" class="nav-link" id="theme-toggle">
+                        <span class="nav-icon" id="theme-icon"><svg class="icon">
+                                <use href="#i-moon" />
+                            </svg></span>
+                        <span id="theme-label">Dark Mode</span>
+                    </a>
+                    <a href="#" class="nav-link" id="profile-link">
+                        <span class="nav-icon"><svg class="icon">
+                                <use href="#i-user" />
+                            </svg></span> Profile
+                    </a>
+                </nav>
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="user-avatar">Y</div>
+                    <div class="user-info">
+                        <div class="user-name" id="user-name">User</div>
+                        <small>Online</small>
+                    </div>
+                    <button class="btn-logout" id="logout-btn" title="Logout">
+                        <svg class="icon-sm">
+                            <use href="#i-logout" />
+                        </svg>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <!-- ─── Dashboard ─── -->
+                <div id="page-dashboard" class="page active">
+                    <div class="page-breadcrumbs">Dashboard &gt; Overview</div>
+
+                    <div class="page-header">
+                        <div class="header-main">
+                            <h1 class="dashboard-title">Personal Finance Portfolio <span
+                                    class="badge badge-outline">Primary Wallet</span></h1>
+                            <div class="header-subtitle">Period: 01 Feb 2026 to 28 Feb 2026</div>
+                        </div>
+                        <div class="header-actions">
+                            <button class="btn-icon" title="Search"><svg class="icon-xs">
+                                    <use href="#i-search" />
+                                </svg></button>
+                            <button class="btn-icon" title="Notifications"><svg class="icon">
+                                    <use href="#i-bell" />
+                                </svg><span class="notif-dot"></span></button>
+                            <button class="btn btn-primary btn-sm" onclick="openAddExpenseModal()">+ New
+                                Expense</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid stats-tally">
+                        <div class="card stat-card purple">
+                            <div class="card-header">
+                                <span class="card-title"><svg class="icon-xs">
+                                        <use href="#i-wallet" />
+                                    </svg> Total Expenses</span>
+                            </div>
+                            <div class="stat-value" id="stat-total">₹0.00</div>
+                            <div class="stat-change negative">↓ 0.00% <small>from last month</small></div>
+                        </div>
+                        <div class="card stat-card cyan">
+                            <div class="card-header">
+                                <span class="card-title"><svg class="icon-xs">
+                                        <use href="#i-chart" />
+                                    </svg> Expenses This Month</span>
+                            </div>
+                            <div class="stat-value" id="stat-count">₹0.00</div>
+                            <div class="stat-change negative">↓ 0.00% <small>from last month</small></div>
+                        </div>
+                        <div class="card stat-card orange">
+                            <div class="card-header">
+                                <span class="card-title"><svg class="icon-xs">
+                                        <use href="#i-target" />
+                                    </svg> Most Spending</span>
+                            </div>
+                            <div class="stat-value" id="stat-top-cat">—</div>
+                            <div class="stat-change">Major Category</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid charts-tally">
+                        <div class="card chart-card wide">
+                            <div class="card-header">
+                                <h3>Month Wise Expenses</h3>
+                                <button class="btn-text-only">DOWNLOAD REPORT</button>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="dash-trend-canvas"></canvas>
+                            </div>
+                        </div>
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3>Expenses Breakdown</h3>
+                                <button class="btn-text-only">DOWNLOAD REPORT</button>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="dash-alloc-canvas"></canvas>
+                            </div>
+                        </div>
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3><svg class="icon-sm">
+                                        <use href="#i-alert" />
+                                    </svg> Budget Alerts</h3>
+                            </div>
+                            <div id="budget-alerts"></div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid secondary" style="margin-top:20px">
+                        <div class="card chart-card wide">
+                            <div class="card-header">
+                                <h3><svg class="icon-sm">
+                                        <use href="#i-zap" />
+                                    </svg> Prediction Analysis</h3>
+                                <div class="card-extra">AI Generated</div>
+                            </div>
+                            <div id="predictions-list" class="prediction-dense"></div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:20px">
+                        <div class="card-header">
+                            <h3><svg class="icon-sm">
+                                    <use href="#i-clock" />
+                                </svg> Recent Expenses</h3>
+                        </div>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Expenses ─── -->
+                <div id="page-expenses" class="page">
+                    <div class="page-header">
+                        <h2>Expenses <span class="badge" id="expense-count-badge">0</span></h2>
+                        <div style="display:flex;gap:8px">
+                            <button class="btn btn-accent btn-sm" id="export-csv-btn"><svg class="icon-xs">
+                                    <use href="#i-upload" />
+                                </svg> Export CSV</button>
+                            <button class="btn btn-accent btn-sm" onclick="openAddExpenseModal()">+ Add Expense</button>
+                        </div>
+                    </div>
+                    <div class="filter-bar">
+                        <div class="filter-group">
+                            <label>Category</label>
+                            <select id="filter-cat">
+                                <option value="">All</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Keyword</label>
+                            <input type="text" id="filter-keyword" placeholder="Search...">
+                        </div>
+                        <div class="filter-group">
+                            <label>Min Amount</label>
+                            <input type="number" id="filter-min" placeholder="0">
+                        </div>
+                        <div class="filter-group">
+                            <label>Max Amount</label>
+                            <input type="number" id="filter-max" placeholder="∞">
+                        </div>
+                        <div class="filter-group">
+                            <label>From</label>
+                            <input type="date" id="filter-start">
+                        </div>
+                        <div class="filter-group">
+                            <label>To</label>
+                            <input type="date" id="filter-end">
+                        </div>
+                        <button class="btn btn-accent btn-sm" id="search-btn"><svg class="icon-xs">
+                                <use href="#i-search" />
+                            </svg> Search</button>
+                    </div>
+                    <div class="card">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Currency</th>
+                                        <th>Date</th>
+                                        <th>Receipt</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenses-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Budgets ─── -->
+                <div id="page-budgets" class="page">
+                    <div class="page-header">
+                        <h2>Budgets</h2>
+                    </div>
+                    <div class="budget-form">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="budget-cat"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Monthly Limit (₹)</label>
+                            <input type="number" id="budget-limit" placeholder="e.g. 5000">
+                        </div>
+                        <button class="btn btn-accent btn-sm" id="set-budget-btn">Set Budget</button>
+                    </div>
+                    <div id="budgets-grid" class="budgets-grid"></div>
+                </div>
+
+                <!-- ─── Trends ─── -->
+                <div id="page-trends" class="page">
+                    <div class="page-header">
+                        <h2>Trends & Heatmap</h2>
+                        <div class="heatmap-controls">
+                            <select id="heatmap-month"></select>
+                            <select id="heatmap-year"></select>
+                            <button class="btn btn-accent btn-sm" id="heatmap-btn"><svg class="icon-xs">
+                                    <use href="#i-calendar" />
+                                </svg> Load Heatmap</button>
+                        </div>
+                    </div>
+                    <div class="trends-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><svg class="icon-sm">
+                                        <use href="#i-trending" />
+                                    </svg> Monthly Spending Trend</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="trend-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><svg class="icon-sm">
+                                        <use href="#i-calendar" />
+                                    </svg> Daily Spending Heatmap</h3>
+                            </div>
+                            <div id="heatmap-container">
+                                <div class="heatmap-grid" id="heatmap-grid"></div>
+                                <div class="heatmap-legend">
+                                    <span>Less</span>
+                                    <div class="heatmap-legend-cell" style="background:rgba(124,108,240,0.1)"></div>
+                                    <div class="heatmap-legend-cell" style="background:rgba(124,108,240,0.3)"></div>
+                                    <div class="heatmap-legend-cell" style="background:rgba(124,108,240,0.5)"></div>
+                                    <div class="heatmap-legend-cell" style="background:rgba(124,108,240,0.7)"></div>
+                                    <div class="heatmap-legend-cell" style="background:rgba(124,108,240,0.9)"></div>
+                                    <span>More</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Reports ─── -->
+                <div id="page-report" class="page">
+                    <div class="page-header">
+                        <h2>Reports</h2>
+                        <div class="report-controls">
+                            <select id="report-month"></select>
+                            <select id="report-year"></select>
+                        </div>
+                    </div>
+                    <div class="report-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><svg class="icon-sm">
+                                        <use href="#i-chart" />
+                                    </svg> Category Breakdown</h3>
+                            </div>
+                            <div id="report-bars"></div>
+                            <div class="report-total" id="report-total"></div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><svg class="icon-sm">
+                                        <use href="#i-pie" />
+                                    </svg> Distribution</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="report-pie"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Categories ─── -->
+                <div id="page-categories" class="page">
+                    <div class="page-header">
+                        <h2>Categories</h2>
+                    </div>
+                    <div class="add-cat-form">
+                        <input type="text" id="new-cat-name" placeholder="New category name...">
+                        <button class="btn btn-accent btn-sm" id="add-cat-btn">+ Add</button>
+                    </div>
+                    <div id="cat-list" class="cat-grid"></div>
+                </div>
+
+                <!-- ─── Recurring ─── -->
+                <div id="page-recurring" class="page">
+                    <div class="page-header">
+                        <h2>Recurring Expenses</h2>
+                        <button class="btn btn-accent btn-sm" id="add-recurring-btn">+ Add Recurring</button>
+                    </div>
+                    <div id="recurring-list" class="recurring-grid"></div>
+                </div>
+
+                <!-- ─── Reminders ─── -->
+                <div id="page-reminders" class="page">
+                    <div class="page-header">
+                        <h2>Reminders</h2>
+                        <button class="btn btn-accent btn-sm" id="add-reminder-btn">+ Add Reminder</button>
+                    </div>
+                    <div id="reminders-list" class="reminders-grid"></div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- ═══ ADD EXPENSE MODAL ═══ -->
+    <div id="add-expense-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add Expense</h3>
+                <button class="modal-close"
+                    onclick="document.getElementById('add-expense-modal').classList.remove('show')"> <svg
+                        class="icon-sm">
+                        <use href="#i-x" />
+                    </svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="expense-cat"></select>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="expense-amount" step="0.01" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label>Currency</label>
+                    <select id="expense-currency">
+                        <option value="INR">INR (₹)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="GBP">GBP (£)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Receipt URL (optional)</label>
+                    <input type="text" id="expense-receipt" placeholder="https://...">
+                </div>
+                <button class="btn btn-primary" id="submit-expense-btn">
+                    <span class="btn-text">Add Expense</span>
+                    <span class="spinner"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ RECURRING EXPENSE MODAL ═══ -->
+    <div id="add-recurring-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add Recurring Expense</h3>
+                <button class="modal-close"
+                    onclick="document.getElementById('add-recurring-modal').classList.remove('show')"> <svg
+                        class="icon-sm">
+                        <use href="#i-x" />
+                    </svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="rec-desc" placeholder="e.g. Netflix subscription" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="rec-cat"></select>
+                </div>
+                <div class="form-group">
+                    <label>Amount</label>
+                    <input type="number" id="rec-amount" step="0.01" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label>Interval</label>
+                    <select id="rec-interval">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly" selected>Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" id="rec-start" required>
+                </div>
+                <button class="btn btn-primary" id="submit-recurring-btn">
+                    <span class="btn-text">Add Recurring</span>
+                    <span class="spinner"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ REMINDER MODAL ═══ -->
+    <div id="add-reminder-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Add Reminder</h3>
+                <button class="modal-close"
+                    onclick="document.getElementById('add-reminder-modal').classList.remove('show')"> <svg
+                        class="icon-sm">
+                        <use href="#i-x" />
+                    </svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="reminder-title" placeholder="e.g. Pay electricity bill" required>
+                </div>
+                <div class="form-group">
+                    <label>Due Date</label>
+                    <input type="date" id="reminder-due" required>
+                </div>
+                <div class="form-group">
+                    <label>Notes (optional)</label>
+                    <textarea id="reminder-notes" placeholder="Additional details..." rows="3"></textarea>
+                </div>
+                <button class="btn btn-primary" id="submit-reminder-btn">
+                    <span class="btn-text">Add Reminder</span>
+                    <span class="spinner"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ PROFILE MODAL ═══ -->
+    <div id="profile-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Profile Settings</h3>
+                <button class="modal-close" onclick="document.getElementById('profile-modal').classList.remove('show')">
+                    <svg class="icon-sm">
+                        <use href="#i-x" />
+                    </svg></button>
+            </div>
+            <div class="modal-body">
+                <div class="profile-section">
+                    <h4 style="margin-bottom:16px;font-size:14px;font-weight:700">Change Password</h4>
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="current-pass" placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="new-pass" placeholder="Enter new password">
+                    </div>
+                    <button class="btn btn-primary" id="change-pass-btn">
+                        <span class="btn-text">Update Password</span>
+                        <span class="spinner"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ KEYBOARD SHORTCUTS ═══ -->
+    <div id="shortcuts-overlay" class="shortcuts-overlay">
+        <div class="shortcuts-card">
+            <div class="card-header" style="margin-bottom:20px">
+                <h3><svg class="icon-sm">
+                        <use href="#i-keyboard" />
+                    </svg> Keyboard Shortcuts</h3>
+                <button class="modal-close" id="shortcuts-close"> <svg class="icon-sm">
+                        <use href="#i-x" />
+                    </svg></button>
+            </div>
+            <div class="shortcut-row"><span>New Expense</span><kbd>N</kbd></div>
+            <div class="shortcut-row"><span>Dashboard</span><kbd>1</kbd></div>
+            <div class="shortcut-row"><span>Expenses</span><kbd>2</kbd></div>
+            <div class="shortcut-row"><span>Trends</span><kbd>3</kbd></div>
+            <div class="shortcut-row"><span>Reports</span><kbd>4</kbd></div>
+            <div class="shortcut-row"><span>Budgets</span><kbd>5</kbd></div>
+            <div class="shortcut-row"><span>Toggle Theme</span><kbd>T</kbd></div>
+            <div class="shortcut-row"><span>Show Shortcuts</span><kbd>?</kbd></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
